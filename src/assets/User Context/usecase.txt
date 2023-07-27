@@ -1,0 +1,23 @@
+import React, { useContext } from 'react';
+
+function UserProfile() {
+  const user = useContext(UserContext);
+
+  // Now 'user' contains the user data fetched from the API
+  // You can use 'user' to display user information in this component
+
+  return (
+    <div>
+      <h2>User Profile</h2>
+      {user ? (
+        <>
+          <p>Name: {user.name}</p>
+          <p>Email: {user.email}</p>
+          {/* Render other user details */}
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+}

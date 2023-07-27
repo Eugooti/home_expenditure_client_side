@@ -1,0 +1,19 @@
+.labelSize{
+    font-size: inherit;
+}
+.structure{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    gap: 20px;
+}
+.button{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.profile{
+    scroll-snap-type: y mandatory;
+
+}

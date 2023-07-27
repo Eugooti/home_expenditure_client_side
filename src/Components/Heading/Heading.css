@@ -1,0 +1,15 @@
+.heading {
+    text-align: center;
+    width: 60%;
+    margin: auto;
+    padding-bottom: 2%;
+    padding-top: 2%;
+}
+.heading h1 {
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 25px;
+}
+.heading p {
+    font-size: 20px;
+}

@@ -1,0 +1,129 @@
+import * as React from 'react';
+import dayjs from 'dayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
+import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+
+export default function DateRangePickerValue() {
+  const [value, setValue] = React.useState([
+    dayjs('2022-04-17'),
+    dayjs('2022-04-21'),
+  ]);
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer components={['DateRangePicker', 'DateRangePicker']}>
+        <DemoItem label="Uncontrolled picker" component="DateRangePicker">
+          <DateRangePicker
+            defaultValue={[dayjs('2022-04-17'), dayjs('2022-04-21')]}
+          />
+        </DemoItem>
+        <DemoItem label="Controlled picker" component="DateRangePicker">
+          <DateRangePicker
+            value={value}
+            onChange={(newValue) => setValue(newValue)}
+          />
+        </DemoItem>
+      </DemoContainer>
+    </LocalizationProvider>
+  );
+}
+
+
+import * as React from 'react';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers-pro';
+import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
+import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+
+export default function BasicDateRangePicker() {
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer components={['DateRangePicker']}>
+        <DateRangePicker localeText={{ start: 'Check-in', end: 'Check-out' }} />
+      </DemoContainer>
+    </LocalizationProvider>
+  );
+}
+
+
+import * as React from 'react';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers-pro';
+import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
+import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+
+export default function DateRangePickerCalendarProp() {
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer
+        components={['DateRangePicker', 'DateRangePicker', 'DateRangePicker']}
+      >
+        <DemoItem label="1 calendar" component="DateRangePicker">
+          <DateRangePicker calendars={1} />
+        </DemoItem>
+        <DemoItem label="2 calendars" component="DateRangePicker">
+          <DateRangePicker calendars={2} />
+        </DemoItem>
+        <DemoItem label="3 calendars" component="DateRangePicker">
+          <DateRangePicker calendars={3} />
+        </DemoItem>
+      </DemoContainer>
+    </LocalizationProvider>
+  );
+}
+
+
+import React from 'react';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+const localizer = momentLocalizer(moment);
+
+const MyCalendar = () => {
+  // Sample event data (Replace this with actual event data from your API)
+  const events = [
+    {
+      id: 1,
+      title: 'Event 1',
+      start: new Date(2023, 6, 19, 10, 0), // July 19, 2023, 10:00 AM
+      end: new Date(2023, 6, 19, 12, 0), // July 19, 2023, 12:00 PM
+      description: 'This is event 1',
+    },
+    {
+      id: 2,
+      title: 'Event 2',
+      start: new Date(2023, 6, 20, 14, 0), // July 20, 2023, 2:00 PM
+      end: new Date(2023, 6, 20, 16, 0), // July 20, 2023, 4:00 PM
+      description: 'This is event 2',
+    },
+    // Add more events as needed
+  ];
+
+  // Function to handle event click
+  const handleEventClick = (event) => {
+    // Do something when an event is clicked
+    console.log('Event clicked:', event);
+    alert(`You clicked on "${event.title}". Description: ${event.description}`);
+  };
+
+  return (
+    <div>
+      <h2>My Calendar</h2>
+      <Calendar
+        localizer={localizer}
+        events={events}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 500 }} // Set the height of the calendar as needed
+        onSelectEvent={handleEventClick} // Attach the onClick event handler
+      />
+    </div>
+  );
+};
+
+export default MyCalendar;
+

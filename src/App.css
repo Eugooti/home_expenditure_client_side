@@ -1,0 +1,68 @@
+
+
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap");
+
+/*--seaweed-50:" #f4faf3";*/
+/*--seaweed-100: #e3f6e2;*/
+/*--seaweed-200: #c9ebc7;*/
+/*--seaweed-300: #9eda9b;*/
+/*--seaweed-400: #6cc068;*/
+/*--seaweed-500: #47a443;*/
+/*--seaweed-600: #378633;*/
+/*--seaweed-700: #2e6a2b;*/
+/*--seaweed-800: #275526;*/
+/*--seaweed-900: #214621;*/
+/*--seaweed-950: #0c220c;*/
+
+
+
+html,
+body,
+#root,
+.app,
+.content {
+  height: 100%;
+  width: 100%;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.app {
+  display: flex;
+  position: fixed;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.centerAlign{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel{
+  scroll-snap-type: both proximity;
+  overflow: auto;
+  display: flex;
+}
+.carousel.item{
+  scroll-snap-align: start;
+}

@@ -1,0 +1,82 @@
+import { ThemeContext } from "../../../assets/ThemeContext/Theme2.jsx";
+import React from 'react';
+import Chart from 'react-apexcharts';
+
+const DonutChart = ({ expenditure_categories, expenditures }) => {
+  // Calculate the total cost for each category
+  const categoryCosts = expenditure_categories.map((category) => {
+    const totalCost = expenditures
+      .filter((expenditure) => expenditure.category === category)
+      .reduce((acc, expenditure) => acc + expenditure.cost, 0);
+    return totalCost;
+  });
+
+  // Generate labels and data for the Doughnut Chart
+  const options = {
+    labels: expenditure_categories,
+  };
+
+  const series = categoryCosts;
+
+  return (
+    <ThemeContext.Consumer>
+      {(context) => {
+        const { lightTheme, light, dark } = context;
+        const theme = !lightTheme ? light : dark;
+
+        return (
+          <div style={{ width: '100%', height: '100%', background: theme.uiElements }}>
+            <Chart
+              options={options}
+              series={series}
+              type={'donut'}
+              width={'100%'}
+              height={300}
+            />
+          </div>
+        );
+      }}
+    </ThemeContext.Consumer>
+  );
+};
+
+export default DonutChart;
+
+
+// Function to calculate categories and total expenses
+const calculateCategoryTotals = (expenditure_categories, expenditures) => {
+  // Create an array to store the total expenses for each category
+  const categoryTotals = expenditure_categories.map((category) => {
+    // Filter the expenditures array to get all items belonging to the current category
+    const categoryItems = expenditures.filter((expenditure) => expenditure.category === category);
+
+    // Calculate the total cost for the current category using reduce function
+    const totalCost = categoryItems.reduce((acc, expenditure) => acc + expenditure.cost, 0);
+
+    // Return the total cost for the current category
+    return totalCost;
+  });
+
+  // Return both the array of categories and the array of total expenses
+  return [expenditure_categories, categoryTotals];
+};
+
+const homeUseExpenditures = [
+  { expenditurename: 'Electricity Bill', category: 'Utilities', cost: 100 },
+  { expenditurename: 'Water Bill', category: 'Utilities', cost: 50 },
+  { expenditurename: 'Groceries', category: 'Food', cost: 200 },
+  { expenditurename: 'Home Maintenance', category: 'Home Improvement', cost: 150 },
+  { expenditurename: 'Internet Bill', category: 'Utilities', cost: 80 },
+  { expenditurename: 'Furniture', category: 'Home Improvement', cost: 300 },
+  // Add more expenditure items here
+];
+
+const expenditure_categories = ['Utilities', 'Food', 'Home Improvement'];
+
+const [categories, categoryTotals] = calculateCategoryTotals(expenditure_categories, homeUseExpenditures);
+
+console.log("Categories:", categories);
+console.log("Category Totals:", categoryTotals);
+
+Categories: [ 'Utilities', 'Food', 'Home Improvement' ]
+Category Totals: [ 230, 200, 450 ]

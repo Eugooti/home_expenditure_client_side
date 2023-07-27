@@ -1,0 +1,323 @@
+Choosing the best color palettes for dark and light modes can be subjective and dependent on various factors such as the brand identity, target audience, and overall design aesthetic. However, here are a few popular and visually pleasing color palettes for both dark and light modes:
+
+Dark Mode Color Palettes:
+
+1. Classic Dark:
+   - Primary Color: #212121 (Dark Gray)
+   - Secondary Color: #FFFFFF (White)
+   - Accent Color: #FF9800 (Orange)
+
+2. Midnight Blue:
+   - Primary Color: #0D1117 (Midnight Blue)
+   - Secondary Color: #FFFFFF (White)
+   - Accent Color: #58A6FF (Light Blue)
+
+3. Earthy Tones:
+   - Primary Color: #1F2A30 (Dark Blue-Green)
+   - Secondary Color: #D8D8D8 (Light Gray)
+   - Accent Color: #E07A5F (Coral)
+
+Light Mode Color Palettes:
+
+1. Clean and Minimal:
+   - Primary Color: #FFFFFF (White)
+   - Secondary Color: #2D2D2D (Dark Gray)
+   - Accent Color: #FF4081 (Pink)
+
+2. Fresh and Vibrant:
+   - Primary Color: #E5F4E3 (Light Green)
+   - Secondary Color: #333333 (Black)
+   - Accent Color: #FFAB40 (Orange)
+
+3. Serene Pastels:
+   - Primary Color: #F1F1F1 (Light Gray)
+   - Secondary Color: #5B616A (Slate Gray)
+   - Accent Color: #8E91FC (Lavender)
+
+Remember, these are just suggestions, and it's essential to consider your brand guidelines, usability, and accessibility standards when choosing color palettes. Additionally, it's recommended to test your color choices across different devices and monitor settings to ensure readability and visual harmony in both dark and light modes.
+
+
+Certainly! Here are some color palettes that maintain visual harmony and consistency between dark and light modes:
+
+1. Cool Blue:
+
+Dark Mode:
+- Primary Color: #162447 (Dark Blue)
+- Secondary Color: #1C3144 (Slate Blue)
+- Accent Color: #38A3A5 (Teal)
+
+Light Mode:
+- Primary Color: #F0F5F9 (Pale Blue)
+- Secondary Color: #D1DCE5 (Light Blue)
+- Accent Color: #5EA8AF (Aqua)
+
+2. Elegant Gray:
+
+Dark Mode:
+- Primary Color: #383838 (Dark Gray)
+- Secondary Color: #5F5F5F (Charcoal Gray)
+- Accent Color: #D6D6D6 (Light Gray)
+
+Light Mode:
+- Primary Color: #F6F6F6 (Pale Gray)
+- Secondary Color: #DADADA (Silver)
+- Accent Color: #787878 (Medium Gray)
+
+3. Earthy Green:
+
+Dark Mode:
+- Primary Color: #31402D (Dark Green)
+- Secondary Color: #466237 (Forest Green)
+- Accent Color: #B3C785 (Muted Green)
+
+Light Mode:
+- Primary Color: #F4F7F2 (Pale Green)
+- Secondary Color: #D4E1CC (Light Green)
+- Accent Color: #7AA74D (Lime Green)
+
+Remember to test these color palettes in different contexts and environments to ensure legibility and accessibility in both dark and light modes.
+
+
+<FormControl fullWidth>
+  <InputLabel id="demo-simple-select-label">Age</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={age}
+    label="Age"
+    onChange={handleChange}
+  >
+    <MenuItem value={10}>Ten</MenuItem>
+    <MenuItem value={20}>Twenty</MenuItem>
+    <MenuItem value={30}>Thirty</MenuItem>
+  </Select>
+</FormControl>
+
+import * as React from 'react';
+import { Theme, useTheme } from '@mui/material/styles';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const names = [
+  'Oliver Hansen',
+  'Van Henry',
+  'April Tucker',
+  'Ralph Hubbard',
+  'Omar Alexander',
+  'Carlos Abbott',
+  'Miriam Wagner',
+  'Bradley Wilkerson',
+  'Virginia Andrews',
+  'Kelly Snyder',
+];
+
+function getStyles(name: string, personName: string[], theme: Theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
+
+export default function MultipleSelect() {
+  const theme = useTheme();
+  const [personName, setPersonName] = React.useState<string[]>([]);
+
+  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
+  return (
+    <div>
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-name-label">Name</InputLabel>
+        <Select
+          labelId="demo-multiple-name-label"
+          id="demo-multiple-name"
+          multiple
+          value={personName}
+          onChange={handleChange}
+          input={<OutlinedInput label="Name" />}
+          MenuProps={MenuProps}
+        >
+          {names.map((name) => (
+            <MenuItem
+              key={name}
+              value={name}
+              style={getStyles(name, personName, theme)}
+            >
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </div>
+  );
+}
+
+
+import * as React from 'react';
+import { alpha, styled } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#A0AAB4',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: '#B2BAC2',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#E0E3E7',
+    },
+    '&:hover fieldset': {
+      borderColor: '#B2BAC2',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#6F7E8C',
+    },
+  },
+});
+
+const BootstrapInput = styled(InputBase)(({ theme }) => ({
+  'label + &': {
+    marginTop: theme.spacing(3),
+  },
+  '& .MuiInputBase-input': {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.mode === 'light' ? '#F3F6F9' : '#1A2027',
+    border: '1px solid',
+    borderColor: theme.palette.mode === 'light' ? '#E0E3E7' : '#2D3843',
+    fontSize: 16,
+    width: 'auto',
+    padding: '10px 12px',
+    transition: theme.transitions.create([
+      'border-color',
+      'background-color',
+      'box-shadow',
+    ]),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focus': {
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+      borderColor: theme.palette.primary.main,
+    },
+  },
+}));
+
+const RedditTextField = styled((props) => (
+  <TextField InputProps={{ disableUnderline: true }} {...props} />
+))(({ theme }) => ({
+  '& .MuiFilledInput-root': {
+    overflow: 'hidden',
+    borderRadius: 4,
+    backgroundColor: theme.palette.mode === 'light' ? '#F3F6F9' : '#1A2027',
+    border: '1px solid',
+    borderColor: theme.palette.mode === 'light' ? '#E0E3E7' : '#2D3843',
+    transition: theme.transitions.create([
+      'border-color',
+      'background-color',
+      'box-shadow',
+    ]),
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+    '&.Mui-focused': {
+      backgroundColor: 'transparent',
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 2px`,
+      borderColor: theme.palette.primary.main,
+    },
+  },
+}));
+
+const ValidationTextField = styled(TextField)({
+  '& input:valid + fieldset': {
+    borderColor: '#E0E3E7',
+    borderWidth: 1,
+  },
+  '& input:invalid + fieldset': {
+    borderColor: 'red',
+    borderWidth: 1,
+  },
+  '& input:valid:focus + fieldset': {
+    borderLeftWidth: 4,
+    padding: '4px !important', // override inline-style
+  },
+});
+
+export default function CustomizedInputsStyled() {
+  return (
+    <Box
+      component="form"
+      noValidate
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: { sm: '1fr 1fr' },
+        gap: 2,
+      }}
+    >
+      <FormControl variant="standard">
+        <InputLabel shrink htmlFor="bootstrap-input">
+          Bootstrap
+        </InputLabel>
+        <BootstrapInput defaultValue="react-bootstrap" id="bootstrap-input" />
+      </FormControl>
+      <RedditTextField
+        label="Reddit"
+        defaultValue="react-reddit"
+        id="reddit-input"
+        variant="filled"
+        style={{ marginTop: 11 }}
+      />
+      <CssTextField label="Custom CSS" id="custom-css-outlined-input" />
+      <ValidationTextField
+        label="CSS validation style"
+        required
+        variant="outlined"
+        defaultValue="Success"
+        id="validation-outlined-input"
+      />
+    </Box>
+  );
+}
+
+
+import EventIcon from '@mui/icons-material/Event';
